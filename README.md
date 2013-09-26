@@ -8,7 +8,7 @@ from a sql backend and presents the data as either an editable JSON object for t
 a read-only XML document for a Polycom SoundPoint IP telephone set to consume.
 
 - I doubt this project will be of any real interest to anyone but myself, however if you have any comments,
-tips, tricks or best practices to offer I'm all ears.
+tips, tricks or best practices to offer, I'm all ears.
 
 ## Dependencies
 * You will need to setup an rvm environment running ruby-2.0.0-p247.
