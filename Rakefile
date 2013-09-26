@@ -4,7 +4,7 @@ task :default => [:run]
 
 desc "run the app locally!"
   task :run do
-    sh "bundle exec rackup -s thin -p 8000"
+    sh "bundle exec rackup -s thin -p 8000 -E development"
   end
 
 desc "run the tests!"

@@ -42,8 +42,8 @@ See the section on versioning for details on currently supported versions.
 
 - All calls will use HTTP endpoints.
 - All requests are in text format and must include a valid URI string.
-- All responses will be in JSON format.
-- GET requests must include a url key in order for a redirect to be generated.
+- All responses will be in either JSON or XML format.
+- GET requests must include a valid telephone extension in order for a directory to be generated.
 
 #### Summary of the HTTP Status Codes:
 

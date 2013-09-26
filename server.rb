@@ -1,15 +1,11 @@
-%w(sinatra sinatra/activerecord json builder).each  { |lib| require lib}
+%w(sinatra mysql2 sinatra/activerecord json builder).each  { |lib| require lib}
 
 
 class Server < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
+  set :database, {adapter: "mysql", host: "localhost", user: "root", pass: "password", db: "directory.feco.net_development"}
 
-  # Define Constants
-
-  configure :test do
-
-  end
 
 
   error do
@@ -25,7 +21,7 @@ class Server < Sinatra::Base
     'These are not the droids you\'re looking for.' +
     '<br>It would appear that you either forgot to add an extension as a parameter,' +
     '<br>or you did not post any data for processing.' +
-    '<br><br>In any case you should probably refer to the README located <a href="https://github.com/medwards42/fio" target="_blank"> here</a>.'
+    '<br><br>In any case you should probably refer to the <a href="https://github.com/medwards42/polycom-directory-api" target="_blank">README</a>.'
   end
 
   get '/health_check' do

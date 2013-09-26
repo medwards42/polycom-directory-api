@@ -8,6 +8,7 @@ gem "rake", "~> 10.1.0"
 
 # data processing gems
 gem 'sinatra-activerecord', '1.2.3'
+gem 'mysql2', '0.3.13'
 gem 'builder', '~>2.1.2'
 
 group :test do
