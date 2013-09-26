@@ -1,6 +1,5 @@
 # polycom-directory-api
-### a simple REST API to facilitate telephone
-### directories on Polycom SIP phones.
+### A simple REST API to facilitate telephone directories on Polycom SIP phones.
 
 ## Description
 
@@ -111,7 +110,7 @@ To push to each app you'll need to do the following:
 
 ## License
 
-Active Record is released under the MIT license:
+This application is released under the MIT license:
 
 * http://www.opensource.org/licenses/MIT
 
