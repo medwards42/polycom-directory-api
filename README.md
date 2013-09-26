@@ -12,19 +12,19 @@ tips, tricks or best practices to offer, I'm all ears.
 
 ## Dependencies
 * You will need to setup an rvm environment running ruby-2.0.0-p247.
-  * You will also need to create a gemset called `polycom-directory`
-    * note: make sure you remember to issue `rvm use ruby-2.0.0-p247@polycom-directory --create` from the command line.
+  * You will also need to create a gemset called `polycom-directory-api`
+    * note: make sure you remember to issue `rvm use ruby-2.0.0-p247@polycom-directory-api --create` from the command line.
     * remember to create a .ruby-version and .ruby-gemset file:
 
       .ruby-version:
         `ruby-2.0.0-p247`
 
       .ruby-gemset:
-        `polycom-directory`
+        `polycom-directory-api`
 
 
 ## Setup
-1. Clone the Repo: Run `git clone git@github.com/medwards42/<tbd>`
+1. Clone the Repo: Run `git clone git@github.com:medwards42/polycom-directory-api.git`
 2. Install the dependencies
 3. Run `gem install bundler`
 4. Run `bundle install`
@@ -105,7 +105,7 @@ This repo consists of one branch, currently it is:
 To push to each app you'll need to do the following:
 
 ##### sbrdme-staging:
-      git remote add origin git@github.com:medwards42/<tbd>
+      git remote add origin git@github.com:medwards42/polycom-directory-api.git
       git push origin checkin
 
 ## License
