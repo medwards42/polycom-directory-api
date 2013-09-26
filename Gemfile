@@ -6,9 +6,9 @@ gem 'thin', '1.5.1'
 
 gem "rake", "~> 10.1.0"
 
-# data processing gems
-gem 'sinatra-activerecord', '1.2.3'
-gem 'mysql2', '0.3.13'
+#setup the databse gems
+gem 'data_mapper', '1.2.0'
+gem 'dm-mysql-adapter', '1.2.0'
 gem 'builder', '~>2.1.2'
 
 group :test do

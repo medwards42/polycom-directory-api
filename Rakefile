@@ -1,4 +1,4 @@
-%w(./server sinatra/activerecord/rake).each  { |lib| require lib}
+%w(./server ).each  { |lib| require lib}
 
 task :default => [:run]
 

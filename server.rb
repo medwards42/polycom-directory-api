@@ -1,11 +1,19 @@
-%w(sinatra mysql2 sinatra/activerecord json builder).each  { |lib| require lib}
+%w(sinatra data_mapper json builder ./lib/directory.rb).each  { |lib| require lib}
 
 
 class Server < Sinatra::Base
-  register Sinatra::ActiveRecordExtension
+  
+  
+  DataMapper::Logger.new($stdout, :info)
+  DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://root:#{ENV['DB_PWD'] || 'password'}@localhost/directory.feco.net_development")
 
-  set :database, {adapter: "mysql", host: "localhost", user: "root", pass: "password", db: "directory.feco.net_development"}
+  configure :test do
+    DataMapper.setup(:default, "mysql://root:#{ENV['DB_PWD'] || 'password'}@localhost/directory.feco.net_development")
+    DataMapper.auto_migrate!
+  end
 
+  DataMapper.auto_migrate!
+  DataMapper.finalize
 
 
   error do
