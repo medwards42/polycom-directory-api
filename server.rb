@@ -2,8 +2,8 @@
 
 
 class Server < Sinatra::Base
-  
-  
+
+
   DataMapper::Logger.new($stdout, :info)
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://root:#{ENV['DB_PWD'] || 'password'}@localhost/directory.feco.net_development")
 
@@ -12,7 +12,7 @@ class Server < Sinatra::Base
     DataMapper.auto_migrate!
   end
 
-  DataMapper.auto_migrate!
+  #DataMapper.auto_migrate!
   DataMapper.finalize
 
 
@@ -51,19 +51,16 @@ class Server < Sinatra::Base
     status 200
     @mac = params[:splat][0].to_s
     @fileExtension = params[:splat][1].to_s
-    @file = JSON.parse(File.read(DirectoryFile), :symbolize_names => true)[:extensions].find { |e| e[:mac] == @mac }
-    if @file == nil
-     status 500
-     body "Extension does not exist."
-    else
-      case @fileExtension
-      when "xml"
-        content_type :xml
-        "#{@file.to_xml(:root => "Directory", :children => "item", :skip_types => true, :dasherize => false)}"
-      when "json"
-        content_type :json
-        "#{@file.to_json}"
-      end
-    end
+
   end
+
+  get '/*.*' do
+    status 200
+    @dn = params[:splat][0].to_s
+    @fileExtension = params[:splat][1].to_s
+    extension = Directory.first(:extension => '2505')
+    content_type :json
+    "#{extension.ln}"
+  end
+
 end
