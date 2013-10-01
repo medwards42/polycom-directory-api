@@ -1,6 +1,6 @@
 require 'data_mapper'
 
-
+# Define the directory model
 class Directory
   include DataMapper::Resource
   property  :id,          Serial
