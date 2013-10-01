@@ -1,4 +1,6 @@
-%w(sinatra data_mapper json builder ./models/directory.rb).each  { |lib| require lib}
+["sinatra", "data_mapper", "json", "builder",  "./models/**/*.rb"].each do |path|
+  Dir[File.dirname(__FILE__) + path].each { |file| require file }
+end
 
 
 class Server < Sinatra::Base
