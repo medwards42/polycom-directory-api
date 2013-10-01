@@ -1,4 +1,4 @@
-%w(sinatra data_mapper json builder ./models/*.rb).each  { |lib| require lib}
+%w(sinatra data_mapper json builder ./models/directory.rb).each  { |lib| require lib}
 
 
 class Server < Sinatra::Base
