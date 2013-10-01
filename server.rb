@@ -64,7 +64,18 @@ class Server < Sinatra::Base
     case @fileExtension
       when "xml"
         content_type :xml
-        "#{extension.to_xml(:root => "Directory", :children => "items", :skip_types => true, :dasherize => false)}"
+        xml = Builder::XmlMarkup.new( :indent => 2 )
+        xml.instruct! :xml, :version => "1.1", :encoding => "UTF8"
+        xml.directory do
+          xml.item_list do
+            xml.item do
+              xml.ln ( extension.ln )
+              xml.fn ( extension.fn )
+              xml.ct ( extension.ct )
+            end
+          end
+        end
+      "#{xml.to_s}" #somethig is wrong here...
       when "json"
         content_type :json
         "#{JSON(extension)}"
