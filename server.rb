@@ -1,9 +1,12 @@
-%w(sinatra data_mapper json builder ./lib/directory.rb).each  { |lib| require lib}
+%w(sinatra data_mapper json builder ./models/*.rb).each  { |lib| require lib}
 
 
 class Server < Sinatra::Base
 
+  # Set configurations
+  set :show_exceptions, false
 
+  # Setup data_mapper
   DataMapper::Logger.new($stdout, :info)
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://root:#{ENV['DB_PWD'] || 'password'}@localhost/directory.feco.net_development")
 
@@ -15,7 +18,7 @@ class Server < Sinatra::Base
   #DataMapper.auto_migrate!
   DataMapper.finalize
 
-
+  # Setup our error handling routine
   error do
     content_type :json
     status 500
@@ -32,6 +35,8 @@ class Server < Sinatra::Base
     '<br><br>In any case you should probably refer to the <a href="https://github.com/medwards42/polycom-directory-api" target="_blank">README</a>.'
   end
 
+
+  # Setup the health_check routine
   get '/health_check' do
     status 200
     begin
@@ -43,24 +48,29 @@ class Server < Sinatra::Base
 
   end
 
+
+  # Setup the default route handler
   get '/' do
     raise(Sinatra::NotFound)  if params.empty?
   end
 
+
+  # Setup the directory route
   get '/*-directory.*' do
     status 200
     @mac = params[:splat][0].to_s
     @fileExtension = params[:splat][1].to_s
-
-  end
-
-  get '/*.*' do
-    status 200
-    @dn = params[:splat][0].to_s
-    @fileExtension = params[:splat][1].to_s
-    extension = Directory.first(:extension => '2505')
-    content_type :json
-    "#{extension.ln}"
+    extension = Directory.first(:mac_address => @mac)
+    case @fileExtension
+      when "xml"
+        content_type :xml
+        "#{extension.to_xml(:root => "Directory", :children => "items", :skip_types => true, :dasherize => false)}"
+      when "json"
+        content_type :json
+        "#{JSON(extension)}"
+      else
+        raise "The file type \"#{@fileExtension}\" is not supported at this time."
+    end
   end
 
 end
