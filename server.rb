@@ -1,5 +1,6 @@
-["sinatra", "data_mapper", "json", "builder",  "./models/**/*.rb"].each do |path|
-  Dir[File.dirname(__FILE__) + path].each { |file| require file }
+%w(sinatra data_mapper json builder).each  { |gems| require gems}
+Dir[File.dirname(__FILE__) + "/models/*.rb"].each do |path|
+  Dir[ path ].each { |model| require model }
 end
 
 
