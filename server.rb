@@ -68,17 +68,19 @@ class Server < Sinatra::Base
       when "xml"
         content_type :xml
         xml = Builder::XmlMarkup.new( :indent => 2 )
-        xml.instruct! :xml, :version => "1.1", :encoding => "UTF8"
+        xml.instruct!
         xml.directory do
           xml.item_list do
             xml.item do
               xml.ln ( extension.ln )
               xml.fn ( extension.fn )
               xml.ct ( extension.ct )
+              xml.sd ( extension.sd )
+              xml.bw ( extension.bw )
             end
           end
         end
-      "#{xml.to_s}" #somethig is wrong here...
+      "#{xml.target!}"
       when "json"
         content_type :json
         "#{JSON(extension)}"
