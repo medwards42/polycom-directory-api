@@ -63,7 +63,7 @@ class Server < Sinatra::Base
     status 200
     @mac = params[:splat][0].to_s
     @fileExtension = params[:splat][1].to_s
-    extension = Directory.first(:mac_address => @mac)
+    extension = Directory.all(:mac_address => @mac)
     case @fileExtension
       when "xml"
         content_type :xml
@@ -71,12 +71,14 @@ class Server < Sinatra::Base
         xml.instruct!
         xml.directory do
           xml.item_list do
-            xml.item do
-              xml.ln ( extension.ln )
-              xml.fn ( extension.fn )
-              xml.ct ( extension.ct )
-              xml.sd ( extension.sd )
-              xml.bw ( extension.bw )
+            extension.each do |ext|
+              xml.item do
+                xml.ln ( ext.ln )
+                xml.fn ( ext.fn )
+                xml.ct ( ext.ct )
+                xml.sd ( ext.sd )
+                xml.bw ( ext.bw )
+              end
             end
           end
         end
