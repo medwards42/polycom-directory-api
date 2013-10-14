@@ -91,4 +91,9 @@ class Server < Sinatra::Base
     end
   end
 
+  post '/' do
+    content_type :json
+    "#{JSON(params)}"
+  end
+
 end
