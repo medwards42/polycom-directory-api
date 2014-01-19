@@ -58,6 +58,15 @@ class Server < Sinatra::Base
   end
 
 
+  # Setup an index route which will show a list of all ext's in the db.
+  get '/index' do
+    status 200
+    content_type :json
+    extensions = Directory.all()
+    "#{JSON.pretty_generate(JSON.parse(extensions.to_json()))}"
+  end
+
+
   # Setup the directory route
   get '/*-directory.*' do
     status 200
@@ -91,4 +100,17 @@ class Server < Sinatra::Base
     end
   end
 
+
+  # Setup the POST action
+  post '/post' do
+    entry = Directory.create(:extension => params[:extension],
+                             :mac_address => params[:mac_address],
+                             :ln => params[:ln],
+                             :fn => params[:fn],
+                             :ct => params[:ct],
+                             :sd => params[:sd],
+                             :bw => params[:bw],
+                             :active => params[:active] )
+    entry.saved? ? "Saved" : "Failed"
+  end
 end
