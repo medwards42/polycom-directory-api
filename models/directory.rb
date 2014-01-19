@@ -11,6 +11,7 @@ class Directory
   property  :ct,          String
   property  :sd,          Integer
   property  :bw,          Boolean, :default => false
+  property  :active,      Boolean, :default => true
   property  :created_at,  DateTime
 
 
