@@ -24,7 +24,7 @@ tips, tricks or best practices to offer, I'm all ears.
 
 
 ## Setup
-1. Clone the Repo: Run `git clone git@github.com:medwards42/polycom-directory-api.git`
+1. Clone the Repo: Run `git clone git@github.com:sqlbyme/polycom-directory-api.git`
 2. Install the dependencies
 3. Run `gem install bundler`
 4. Run `bundle install`
@@ -104,8 +104,8 @@ This repo consists of one branch, currently it is:
 #### Pushing
 To push to each app you'll need to do the following:
 
-##### sbrdme-staging:
-      git remote add origin git@github.com:medwards42/polycom-directory-api.git
+##### polycom-directory-api:
+      git remote add origin git@github.com:sqlbyme/polycom-directory-api.git
       git push origin checkin
 
 ## License
